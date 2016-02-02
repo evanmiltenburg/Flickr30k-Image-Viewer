@@ -1,0 +1,26 @@
+<html>
+<center>
+<h3>Annotate the image</h3>
+<p>Click the relevant category.</p>
+</center>
+<table>
+    <tr>
+        <td><img src="{{image_url}}" style="max-width:500px;max-height:300px;border:5px solid white"></td>
+        <td>
+            <form id='filelist' method='post' action="submit_category">
+                <form>
+                {% for cat in categories %}
+                    <input type="radio" name="category" value="{{cat}}">{{cat}}<br>
+                {% endfor %}
+                <input type="radio" name="category" value="OTHER" checked>Other, namely: <input type="text" id='textbox' size='20' value='' name="other"><br>
+                <input type="hidden" name="image_url" value="{{image_url}}">
+                <input type='submit' value='Submit' />
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+
+
+</html>

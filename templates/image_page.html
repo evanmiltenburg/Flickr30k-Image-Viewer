@@ -1,0 +1,105 @@
+<!doctype html>
+
+<title>Image viewer</title>
+<body bgcolor="#cccccc" style="font-family: verdana; font-size: 12px">
+<table>
+    <col width="600">
+<col width="600">
+<tr><td><center><b>Image {{image_number}} ({{current +1}}/{{total}})</b></center></td><td>
+    <a href="/image/FIRST">&lt;&lt;&lt; First</a> |
+    {% if previous %}
+      <a href="{{previous}}">&lt; Previous</a>
+    {% else %}
+    &lt; Previous
+    {% endif %}
+    | <a href="/image/RANDOM">Random</a> |
+    {% if following %}
+      <a href="{{following}}">Next &gt;</a>
+      {% else %}
+      Next &gt;
+    {% endif %}
+    | <a href="/image/LAST">Last &gt;&gt;&gt;</a>
+</td>
+</tr>
+<tr><td>
+<center>
+    <img src="{{image}}" style="max-width:500px;max-height:300px;border:5px solid white">
+</center>
+</td><td>
+
+<!--Form modifying code for easier annotation.-->
+<table>
+<tr><td>
+<select id="selectInference">
+  <option value="void">kind of inference</option>
+  <option value="infer:age:">Age</option>
+  <option value="infer:activity:">Activity</option>
+  <option value="infer:descent:">Descent</option>
+  <option value="infer:ethnicity:">Ethnicity</option>
+  <option value="infer:event:">Event</option>
+  <option value="infer:goal:">Goal</option>
+  <option value="infer:location:">Location</option>
+  <option value="infer:occupation:">Occupation</option>
+  <option value="infer:relation:">Relation</option>
+  <option value="infer:status:">Status</option>
+</select></td><td>
+<input type="text" id="specificInference" size="60" onkeypress="submitInference(event)"></td></tr>
+<tr><td>Feature:</td><td><input type="text" id="specificFeature" size="60" onkeypress="submitFeature(event)"></td></tr>
+<tr><td>No Feature:</td><td><input type="text" id="noFeature" size="60" onkeypress="submitNoFeature(event)"></td></tr>
+<tr><td>Variation</td><td><input type="text" id="variation" size="60" onkeypress="submitVariation(event)"></td></tr>
+</table>
+
+<script>
+function submitInference(e) {
+    if(e.keyCode === 13){
+        var inferenceMenu = document.getElementById("selectInference");
+        var inference = inferenceMenu.options[inferenceMenu.selectedIndex].value;
+        if(inference != "void"){
+            var subInference = document.getElementById("specificInference").value
+            document.getElementById("textbox").value += inference
+            document.getElementById("textbox").value += subInference
+            document.getElementById("textbox").value += '\n'
+        }
+    }
+}
+function submitFeature(e){
+    if(e.keyCode === 13){
+        var relevantFeature = document.getElementById("specificFeature").value
+        document.getElementById("textbox").value += 'feature:' + relevantFeature + '\n'
+    }
+}
+function submitNoFeature(e){
+    if(e.keyCode === 13){
+        var relevantFeature = document.getElementById("noFeature").value
+        document.getElementById("textbox").value += 'nofeature:' + relevantFeature + '\n'
+    }
+}
+
+function submitVariation(e){
+    if(e.keyCode === 13){
+        var variation = document.getElementById("variation").value
+        document.getElementById("textbox").value += 'variation:' + variation + '\n'
+    }
+}
+</script>
+
+<form id='answerform' method='post' action="{{url_for('image_page',image_number=image_number)}}" >
+<textarea id='textbox' rows="8" cols="60" name="comments" style="background-color : #e6e6e6; "></textarea><br />
+{{comment_saved}}
+<p>
+<input type='submit' value='Submit' /> <!--the 'value' is the word that will appear on your button.-->
+</p>
+        </form>
+    </td>
+</tr>
+<tr>
+    <td colspan="2" style="background-color:#f2f2f2">
+    <ul>
+<li>{{captions.0}}</li>
+<li>{{captions.1}}</li>
+<li>{{captions.2}}</li>
+<li>{{captions.3}}</li>
+<li>{{captions.4}}</li>
+</ul></td></tr>
+</table>
+</body>
