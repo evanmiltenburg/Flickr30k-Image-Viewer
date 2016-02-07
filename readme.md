@@ -20,7 +20,7 @@ There are two separate tools: one general tool that I made for the annotation of
 ## General tool
 The general tool is very versatile. It features navigation (so you can go to the first, previous, random, next, and last image), and several text boxes for annotation.
 
-The top four input fields are easily modifiable through Javascript (see `templates/image_page.html`). I made them so that my annotations got written to the larger text area in a standardized (machine-readable) format. The text area contains everything that will be saved to an external file called `comments.txt`.
+The top four input fields are easily modifiable through Javascript (see `templates/image_page.html`). I made them so that the annotations get written to the larger text area in a standardized (machine-readable) format. Just write down your thoughts in any of the four categories and press Enter. The text area contains everything that will be saved to an external file called `comments.txt`. When you're done annotating an image, press 'submit' and your annotations are appended to the comments file.
 
 <img src="screenshots/image_viewer.png" alt="Screenshot of the image viewer tool">
 
